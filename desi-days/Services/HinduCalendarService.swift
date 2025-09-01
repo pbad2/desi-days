@@ -8,7 +8,7 @@ class HinduCalendarService: ObservableObject {
     private var userLatitude: Double = 12.9716  // Default to Bangalore, India
     private var userLongitude: Double = 77.5946
     
-    init(apiKey: String = "YOUR_API_KEY_HERE") {
+    init(apiKey: String = Config.astrologyAPIKey) {
         self.astrologyClient = AstrologyAPIClient(apiKey: apiKey)
         Task {
             await loadFestivals()
@@ -16,7 +16,7 @@ class HinduCalendarService: ObservableObject {
     }
     
     convenience init() {
-        self.init(apiKey: "YOUR_API_KEY_HERE")
+        self.init(apiKey: Config.astrologyAPIKey)
     }
     
     func updateLocation(latitude: Double, longitude: Double) {
