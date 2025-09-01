@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct desi_daysApp: App {
+    @StateObject private var hinduCalendarService = HinduCalendarService(apiKey: "YOUR_API_KEY_HERE")
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(hinduCalendarService)
         }
     }
 }

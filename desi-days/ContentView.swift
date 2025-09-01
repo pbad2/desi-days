@@ -8,17 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selectedDate = Date()
+    @EnvironmentObject var hinduCalendarService: HinduCalendarService
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                CalendarView(selectedDate: $selectedDate)
+                
+                Divider()
+
+                ScrollView {
+                    FestivalDetailsView(festivals: hinduCalendarService.getFestivals(for: selectedDate))
+                        .padding(.vertical, 4)
+                        .padding()
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                }
+
+                Spacer()
+            }
+            .navigationTitle("Desi Days")
         }
-        .padding()
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(HinduCalendarService())
+    }
 }
